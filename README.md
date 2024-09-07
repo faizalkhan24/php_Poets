@@ -165,7 +165,7 @@ The backend of this project is built using Node.js with Express and MySQL. It ha
        - `404 Not Found`: If the task does not exist.
        - `500 Internal Server Error`: For unexpected errors.
 
-4. **DELETE /tasks/:id**
+4. **DELETE /delete/:id**
    - **Description**: Deletes a task by ID.
    - **Response**:
      - **Success**: `204 No Content` indicating the task was deleted.
@@ -209,4 +209,116 @@ The backend of this project is built using Node.js with Express and MySQL. It ha
 
 - **Validation Errors**: Returns specific error messages for validation issues.
 - **Server Errors**: Logs errors and returns generic error messages to the client.
+
+
+Here's a comprehensive description of the frontend setup for your project, including the login, signup, and dashboard pages, as well as the various components used.
+
+---
+
+## Frontend Overview
+
+The frontend of this project is built using React and Next.js. It includes several key components and pages for user authentication and task management. Below is a detailed description of how the frontend is structured, along with descriptions of the main components.
+
+### Pages
+
+1. **Login Page**
+   - **Path**: `/login`
+   - **Description**: Provides a form for users to log in using their username and password. On successful login, users are redirected to the dashboard. If credentials are incorrect, appropriate error messages are displayed.
+   - **Features**:
+     - Form fields for username and password.
+     - Error message display.
+     - Link to the signup page for new users.
+
+2. **Signup Page**
+   - **Path**: `/signup`
+   - **Description**: Allows new users to register by providing a username, email, password, and confirmPassword. Validates that all fields are provided and that passwords match before submitting. On successful signup, users are redirected to the login page.
+   - **Features**:
+     - Form fields for username, email, password, and confirmPassword.
+     - Error and success message display.
+     - Link to the login page for existing users.
+
+3. **Dashboard Page**
+   - **Path**: `/dashboard`
+   - **Description**: Displays the main application interface, including a sidebar, header, and task table. Allows users to view and manage tasks.
+   - **Features**:
+     - Sidebar for navigation.
+     - Header with user information and logout button.
+     - Task table for viewing tasks.
+     - Integration with modals for task creation and deletion.
+
+### Components
+
+1. **Sidebar**
+   - **Path**: `components/Sidebar.tsx`
+   - **Description**: Provides navigation links to different sections of the application.
+   - **Features**:
+     - Links to Dashboard and other pages.
+
+2. **Header**
+   - **Path**: `components/Header.tsx`
+   - **Description**: Displays the application title and user information. Includes a logout button that clears the authentication token and redirects to the login page.
+   - **Features**:
+     - Title display.
+     - User greeting.
+     - Logout button functionality.
+
+3. **Task Table**
+   - **Path**: `components/TaskTable.tsx`
+   - **Description**: Shows a list of tasks in a tabular format. Provides options to view, edit, and delete tasks.
+   - **Features**:
+     - Display tasks with details such as title, description, and due date.
+     - Edit and delete task options.
+
+4. **TaskCreateModal**
+   - **Path**: `components/TaskCreateModal.tsx`
+   - **Description**: Modal component for creating new tasks and updating existing tasks. Uses the same component for both operations.
+   - **Features**:
+     - Form fields for task title, description, and due date.
+     - Save and cancel buttons.
+     - Supports both creating new tasks and updating existing ones.
+
+5. **ConfirmationModal**
+   - **Path**: `components/ConfirmationModal.tsx`
+   - **Description**: Modal component for confirming the deletion of tasks. Provides options to confirm or cancel the deletion.
+   - **Features**:
+     - Confirmation message.
+     - Confirm and cancel buttons.
+
+6. **DashboardLayout**
+   - **Path**: `components/DashboardLayout.tsx`
+   - **Description**: Layout component for arranging the sidebar, header, and main content area (including the task table and modals).
+   - **Features**:
+     - Sidebar and header placement.
+     - Main content area for displaying task-related components.
+
+7. **WithAuth**
+   - **Path**: `components/WithAuth.tsx`
+   - **Description**: Higher-order component (HOC) to protect routes from unauthenticated access. Redirects users to the login page if they are not authenticated.
+   - **Features**:
+     - Checks for authentication token.
+     - Redirects unauthenticated users to the login page.
+
+### Authentication and Access Control
+
+- **WithAuth HOC**: Applied to the dashboard and other protected pages to ensure that only authenticated users can access them. If a user attempts to access a protected page without being logged in, they will be redirected to the login page.
+
+### Frontend Workflow
+
+1. **User Authentication**: Users must log in or sign up before accessing the dashboard. The `WithAuth` HOC ensures that only authenticated users can access protected routes.
+
+2. **Task Management**: 
+   - **Creating Tasks**: Users can create new tasks using the `TaskCreateModal`.
+   - **Updating Tasks**: Users can update existing tasks through the same modal.
+   - **Deleting Tasks**: Users can delete tasks, with confirmation provided by the `ConfirmationModal`.
+
+3. **Navigation**: The `Sidebar` and `Header` components facilitate navigation and user interaction throughout the application.
+
+### Error Handling and User Feedback
+
+- **Login and Signup Pages**: Display appropriate error and success messages based on user actions and server responses.
+- **Modals**: Provide feedback and confirmation prompts for task management operations.
+
+---
+
+This overview provides a detailed description of the frontend setup, including how components interact, authentication flows, and task management features.
 
