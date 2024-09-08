@@ -1,23 +1,25 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Loader from "../components/Loader"; // Adjust the path as needed
 
 const withAuth = (WrappedComponent: React.FC) => {
   const AuthenticatedComponent = (props: any) => {
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
       const token = localStorage.getItem("token");
 
       if (!token) {
-        router.push("/login"); 
+        router.push("/login");
+      } else {
+        setIsLoading(false);
       }
     }, [router]);
 
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
-
-    if (!token) {
-      return null;
+    if (isLoading) {
+      return <Loader />;
     }
 
     return <WrappedComponent {...props} />;
