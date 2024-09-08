@@ -174,4 +174,4 @@ const DashboardPage: React.FC = () => {
   );
 };
 
-export default withAuth(DashboardPage);
+export default DashboardPage ;
