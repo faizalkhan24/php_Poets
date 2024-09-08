@@ -61,6 +61,14 @@ NEXT_PUBLIC_API_URL=<your-api-url>
 
 Replace `<your-api-url>` with the URL of your backend API.
 
+Then Start the both server with 
+Backend:- npm start
+frontend:- npm run dev
+
+url :- localhost:3000/login
+
+
+
 
 Here's an updated version of the backend description, including additional conditions and error handling:
 
